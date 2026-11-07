@@ -543,7 +543,7 @@ fn test_ecdsa_prime256v1_sha256_spki_inside_spki() {
     );
 }
 
-#[cfg(all(feature = "aws-lc-rs", not(feature = "aws-lc-rs-fips")))]
+#[cfg(feature = "ml-dsa")]
 mod ml_dsa {
     use pki_types::CertificateDer;
     use pki_types::pem::PemObject;

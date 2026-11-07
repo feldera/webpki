@@ -55,6 +55,7 @@ impl SignatureVerificationAlgorithm for AwsLcRsAlgorithm {
 }
 
 /// ML-DSA signatures using the [4, 4] matrix (security strength category 2).
+#[cfg(feature = "ml-dsa")]
 pub static ML_DSA_44: &dyn SignatureVerificationAlgorithm = &AwsLcRsAlgorithm {
     public_key_alg_id: alg_id::ML_DSA_44,
     signature_alg_id: alg_id::ML_DSA_44,
@@ -62,6 +63,7 @@ pub static ML_DSA_44: &dyn SignatureVerificationAlgorithm = &AwsLcRsAlgorithm {
 };
 
 /// ML-DSA signatures using the [6, 5] matrix (security strength category 3).
+#[cfg(feature = "ml-dsa")]
 pub static ML_DSA_65: &dyn SignatureVerificationAlgorithm = &AwsLcRsAlgorithm {
     public_key_alg_id: alg_id::ML_DSA_65,
     signature_alg_id: alg_id::ML_DSA_65,
@@ -69,6 +71,7 @@ pub static ML_DSA_65: &dyn SignatureVerificationAlgorithm = &AwsLcRsAlgorithm {
 };
 
 /// ML-DSA signatures using the [8. 7] matrix (security strength category 5).
+#[cfg(feature = "ml-dsa")]
 pub static ML_DSA_87: &dyn SignatureVerificationAlgorithm = &AwsLcRsAlgorithm {
     public_key_alg_id: alg_id::ML_DSA_87,
     signature_alg_id: alg_id::ML_DSA_87,
@@ -292,8 +295,11 @@ mod tests {
         // Algorithms deprecated because they are nonsensical combinations.
         super::ECDSA_P256_SHA384, // Truncates digest.
         super::ECDSA_P384_SHA256, // Digest is unnecessarily short.
+        #[cfg(feature = "ml-dsa")]
         super::ML_DSA_44,
+        #[cfg(feature = "ml-dsa")]
         super::ML_DSA_65,
+        #[cfg(feature = "ml-dsa")]
         super::ML_DSA_87,
     ];
 

@@ -123,13 +123,16 @@ pub mod aws_lc_rs {
     pub use super::aws_lc_rs_algs::{
         ECDSA_P256_SHA256, ECDSA_P256_SHA384, ECDSA_P256_SHA512, ECDSA_P384_SHA256,
         ECDSA_P384_SHA384, ECDSA_P384_SHA512, ECDSA_P521_SHA256, ECDSA_P521_SHA384,
-        ECDSA_P521_SHA512, ED25519, ML_DSA_44, ML_DSA_65, ML_DSA_87, RSA_PKCS1_2048_8192_SHA256,
+        ECDSA_P521_SHA512, ED25519, RSA_PKCS1_2048_8192_SHA256,
         RSA_PKCS1_2048_8192_SHA256_ABSENT_PARAMS, RSA_PKCS1_2048_8192_SHA384,
         RSA_PKCS1_2048_8192_SHA384_ABSENT_PARAMS, RSA_PKCS1_2048_8192_SHA512,
         RSA_PKCS1_2048_8192_SHA512_ABSENT_PARAMS, RSA_PKCS1_3072_8192_SHA384,
         RSA_PSS_2048_8192_SHA256_LEGACY_KEY, RSA_PSS_2048_8192_SHA384_LEGACY_KEY,
         RSA_PSS_2048_8192_SHA512_LEGACY_KEY,
     };
+    // ML-DSA needs aws-lc-rs 1.18; this fork pins 1.17.1.
+    #[cfg(feature = "ml-dsa")]
+    pub use super::aws_lc_rs_algs::{ML_DSA_44, ML_DSA_65, ML_DSA_87};
 }
 
 /// An array of all the verification algorithms exported by this crate.
@@ -206,11 +209,11 @@ pub static ALL_VERIFICATION_ALGS: &[&dyn pki_types::SignatureVerificationAlgorit
     aws_lc_rs::RSA_PSS_2048_8192_SHA384_LEGACY_KEY,
     #[cfg(feature = "aws-lc-rs")]
     aws_lc_rs::RSA_PSS_2048_8192_SHA512_LEGACY_KEY,
-    #[cfg(feature = "aws-lc-rs")]
+    #[cfg(feature = "ml-dsa")]
     aws_lc_rs::ML_DSA_44,
-    #[cfg(feature = "aws-lc-rs")]
+    #[cfg(feature = "ml-dsa")]
     aws_lc_rs::ML_DSA_65,
-    #[cfg(feature = "aws-lc-rs")]
+    #[cfg(feature = "ml-dsa")]
     aws_lc_rs::ML_DSA_87,
 ];
 
